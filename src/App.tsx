@@ -1,38 +1,55 @@
-import * as React from "react"
+import * as React from "react";
 import {
-  ChakraProvider,
   Box,
-  Text,
-  Link,
+  ChakraProvider,
+  Heading,
+  SimpleGrid,
   VStack,
-  Code,
-  Grid,
-  theme,
-} from "@chakra-ui/react"
-import { ColorModeSwitcher } from "./ColorModeSwitcher"
-import { Logo } from "./Logo"
+} from "@chakra-ui/react";
+import theme from "./style/theme";
+import Board from "./components/tic-tac-toe";
+import { PLAYER_SYMBOLS } from "./types";
 
 export const App = () => (
   <ChakraProvider theme={theme}>
     <Box textAlign="center" fontSize="xl">
-      <Grid minH="100vh" p={3}>
-        <ColorModeSwitcher justifySelf="flex-end" />
-        <VStack spacing={8}>
-          <Logo h="40vmin" pointerEvents="none" />
-          <Text>
-            Edit <Code fontSize="xl">src/App.tsx</Code> and save to reload.
-          </Text>
-          <Link
-            color="teal.500"
-            href="https://chakra-ui.com"
-            fontSize="2xl"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn Chakra
-          </Link>
-        </VStack>
-      </Grid>
+      <Box minH="100vh" px={50}>
+        <Box height={50} my={20}>
+          <Heading size={"2xl"} color={"brand.800"}>
+            Tic-Tac-Toe
+          </Heading>
+        </Box>
+        <Box>
+          <SimpleGrid>
+            <VStack width={250}>
+              <Heading size={"md"} color={"brand.800"} my={10}>
+                Two player
+              </Heading>
+              <Board
+                board={{
+                  data: [
+                    [
+                      PLAYER_SYMBOLS.ROUND,
+                      PLAYER_SYMBOLS.ROUND,
+                      PLAYER_SYMBOLS.ROUND,
+                    ],
+                    [
+                      PLAYER_SYMBOLS.ROUND,
+                      PLAYER_SYMBOLS.ROUND,
+                      PLAYER_SYMBOLS.ROUND,
+                    ],
+                    [
+                      PLAYER_SYMBOLS.CROSS,
+                      PLAYER_SYMBOLS.CROSS,
+                      PLAYER_SYMBOLS.CROSS,
+                    ],
+                  ],
+                }}
+              />
+            </VStack>
+          </SimpleGrid>
+        </Box>
+      </Box>
     </Box>
   </ChakraProvider>
-)
+);
